@@ -58,7 +58,7 @@
       }
     ]
   },
-  "editable": false,
+  "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": null,
@@ -120,7 +120,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(apiserver_request_total{job=\"kubernetes-apiservers\"}[2m]))",
+          "expr": "sum(rate(apiserver_request_total{job=~\"kubernetes-apiservers|apiserver\"}[2m]))",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -536,7 +536,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "up{job=\"kubernetes-apiservers\"}",
+          "expr": "up{job=~\"kubernetes-apiservers|apiserver\"}",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -604,7 +604,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg_over_time(up{job=\"kubernetes-apiservers\"}[90d]) * 100\n",
+          "expr": "avg_over_time(up{job=~\"kubernetes-apiservers|apiserver\"}[90d]) * 100\n",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -672,7 +672,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg_over_time(up{job=\"kubernetes-apiservers\"}[30d]) * 100\n",
+          "expr": "avg_over_time(up{job=~\"kubernetes-apiservers|apiserver\"}[30d]) * 100\n",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -740,7 +740,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "avg_over_time(up{job=\"kubernetes-apiservers\"}[7d]) * 100\n",
+          "expr": "avg_over_time(up{job=~\"kubernetes-apiservers|apiserver\"}[7d]) * 100\n",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -843,7 +843,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "process_resident_memory_bytes{job=\"kubernetes-apiservers\"}",
+          "expr": "process_resident_memory_bytes{job=~\"kubernetes-apiservers|apiserver\"}",
           "instant": false,
           "legendFormat": "memory usage",
           "range": true,
@@ -944,7 +944,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "rate(process_cpu_seconds_total{job=\"kubernetes-apiservers\"}[2m])",
+          "expr": "rate(process_cpu_seconds_total{job=~\"kubernetes-apiservers|apiserver\"}[2m])",
           "instant": false,
           "legendFormat": "cpu usage",
           "range": true,
@@ -1148,7 +1148,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (verb) (\n  rate(apiserver_request_total{job=\"kubernetes-apiservers\"}[2m])\n)\n",
+          "expr": "sum by (verb) (\n  rate(apiserver_request_total{job=~\"kubernetes-apiservers|apiserver\"}[2m])\n)\n",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -1204,7 +1204,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1248,7 +1249,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (verb) (\n  rate(apiserver_request_duration_seconds_sum{job=\"kubernetes-apiservers\", verb!=\"WATCH\"}[4m])\n)\n\n\n",
+          "expr": "sum by (verb) (\n  rate(apiserver_request_duration_seconds_sum{job=~\"kubernetes-apiservers|apiserver\", verb!=\"WATCH\"}[4m])\n)\n\n\n",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -1304,7 +1305,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1348,7 +1350,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (verb) (\n  rate(apiserver_request_duration_seconds_sum{job=\"kubernetes-apiservers\", verb!=\"WATCH\"}[4m])\n) / \nsum by (verb) (\n  rate(apiserver_request_duration_seconds_count{job=\"kubernetes-apiservers\", verb!=\"WATCH\"}[4m])\n)\n",
+          "expr": "sum by (verb) (\n  rate(apiserver_request_duration_seconds_sum{job=~\"kubernetes-apiservers|apiserver\", verb!=\"WATCH\"}[4m])\n) / \nsum by (verb) (\n  rate(apiserver_request_duration_seconds_count{job=~\"kubernetes-apiservers|apiserver\", verb!=\"WATCH\"}[4m])\n)\n",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -1404,7 +1406,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1446,7 +1449,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(apiserver_response_sizes_sum{job=\"kubernetes-apiservers\"}[2m])) / sum(rate(apiserver_response_sizes_count{job=\"kubernetes-apiservers\"}[2m]))\n",
+          "expr": "sum(rate(apiserver_response_sizes_sum{job=~\"kubernetes-apiservers|apiserver\"}[2m])) / sum(rate(apiserver_response_sizes_count{job=~\"kubernetes-apiservers|apiserver\"}[2m]))\n",
           "instant": false,
           "legendFormat": "response size",
           "range": true,
@@ -1502,7 +1505,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1544,7 +1548,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.5, sum(rate(apiserver_response_sizes_bucket{job=\"kubernetes-apiservers\"}[2m])) by (le))\n",
+          "expr": "histogram_quantile(0.5, sum(rate(apiserver_response_sizes_bucket{job=~\"kubernetes-apiservers|apiserver\"}[2m])) by (le))\n",
           "instant": false,
           "legendFormat": "median response size",
           "range": true,
@@ -1600,7 +1604,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1642,7 +1647,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum(rate(apiserver_response_sizes_bucket{job=\"kubernetes-apiservers\"}[2m])) by (le))\n",
+          "expr": "histogram_quantile(0.99, sum(rate(apiserver_response_sizes_bucket{job=~\"kubernetes-apiservers|apiserver\"}[2m])) by (le))\n",
           "instant": false,
           "legendFormat": "99th percentile response size",
           "range": true,
@@ -1698,7 +1703,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1739,7 +1745,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (verb) (\n  apiserver_longrunning_requests{job=\"kubernetes-apiservers\", verb!=\"WATCH\"}\n)\n",
+          "expr": "sum by (verb) (\n  apiserver_longrunning_requests{job=~\"kubernetes-apiservers|apiserver\", verb!=\"WATCH\"}\n)\n",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -1795,7 +1801,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1836,7 +1843,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(\n  apiserver_current_inflight_requests{job=\"kubernetes-apiservers\"}\n)\n",
+          "expr": "sum(\n  apiserver_current_inflight_requests{job=~\"kubernetes-apiservers|apiserver\"}\n)\n",
           "instant": false,
           "legendFormat": "inflight requests",
           "range": true,
@@ -1893,7 +1900,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1937,7 +1945,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (operation) (\n  rate(etcd_request_duration_seconds_count{job=\"kubernetes-apiservers\"}[2m])\n)\n",
+          "expr": "sum by (operation) (\n  rate(etcd_request_duration_seconds_count{job=~\"kubernetes-apiservers|apiserver\"}[2m])\n)\n",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -1993,7 +2001,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2037,7 +2046,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (operation) (\n  rate(etcd_request_duration_seconds_sum{job=\"kubernetes-apiservers\"}[5m])\n) ",
+          "expr": "sum by (operation) (\n  rate(etcd_request_duration_seconds_sum{job=~\"kubernetes-apiservers|apiserver\"}[5m])\n) ",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -2093,7 +2102,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2130,7 +2140,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "process_open_fds{job=\"kubernetes-apiservers\"}",
+          "expr": "process_open_fds{job=~\"kubernetes-apiservers|apiserver\"}",
           "instant": false,
           "legendFormat": "file descriptor",
           "range": true,
@@ -2186,7 +2196,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2223,7 +2234,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "go_goroutines{job=\"kubernetes-apiservers\"}",
+          "expr": "go_goroutines{job=~\"kubernetes-apiservers|apiserver\"}",
           "instant": false,
           "legendFormat": "go rutines",
           "range": true,
@@ -2249,6 +2260,6 @@
   "timezone": "",
   "title": "Kube-apiserver",
   "uid": "e9faa068-886a-4541-8532-bbf05de9a26a",
-  "version": 50,
+  "version": 51,
   "weekStart": ""
 }
