@@ -1,0 +1,13 @@
+repositories:
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+releases:
+  - name: prometheus-stack 
+    chart: prometheus-community/kube-prometheus-stack
+    version: 61.3.2 
+    namespace: sre 
+    values:
+      - ./values.yaml
+helmDefaults:
+    reuseValues: true
+    createNamespace: true

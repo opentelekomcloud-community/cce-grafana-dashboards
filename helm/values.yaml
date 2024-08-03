@@ -1,0 +1,47 @@
+kubeProxy:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubelet:
+  enabled: true
+crds:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+coreDns:
+  enabled: false
+kubeEtcd:
+  enabled: false
+prometheus:
+  enabled: true
+  prometheusSpec:
+    resources:
+      requests:
+        memory: "2000Mi"
+        cpu: "500m"
+      limits:
+        memory: "4000Mi"
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: csi-disk-topology 
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+              storage: 20G
+grafana:
+  # change this if you want initial dashboards
+  defaultDashboardsEnabled: false
+  persistence:
+    enabled: true
+    type: sts
+    storageClassName: csi-disk-topology 
+    accessModes:
+      - ReadWriteOnce
+    size: 20Gi
+  resources:
+    requests:
+      memory: "500Mi"
+      cpu: "500m"
+    limits:
+      memory: "2000Mi"
