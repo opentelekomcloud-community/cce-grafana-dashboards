@@ -28,7 +28,7 @@ prometheus:
           accessModes: [ "ReadWriteOnce" ]
           resources:
             requests:
-              storage: 20G
+              storage: 20Gi
 grafana:
   # change this if you want initial dashboards
   defaultDashboardsEnabled: false

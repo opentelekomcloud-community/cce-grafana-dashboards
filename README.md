@@ -8,7 +8,7 @@ Follow the instructions below to import and use the Grafana dashboards from this
 
 ### Prerequisites
 
-- A running Grafana instance
+- A running Grafana instance (you can check out `./helm/` directory for a basic deployment)
 - Appropriate data sources configured in Grafana (e.g., Prometheus, InfluxDB, etc.)
 
 ### Importing a Dashboard
@@ -35,7 +35,7 @@ Follow the instructions below to import and use the Grafana dashboards from this
 
 Here are some of the dashboards you can find in this repository:
 
-- **Kube-API Monitoring Dashboard**: A comprehensive dashboard for monitoring Kubernetes API server performance and health.
+- **Kube-API Monitoring Dashboard**: A comprehensive dashboard for monitoring Kubernetes API server performance and health. [location](https://github.com/opentelekomcloud-community/cce-grafana-dashboards/tree/main/kube-api)
 
 ## Contributing
 

@@ -8,11 +8,16 @@ This setup provides a foundational monitoring solution with Grafana for visualiz
 
 ## Requirements
 
-- CCE Cluster
+- CCE Cluster [docs](https://docs.otc.t-systems.com/cloud-container-engine/umn/clusters/creating_a_cluster/creating_a_cce_standard_turbo_cluster.html)
 - helm3 [install](https://helm.sh/docs/intro/install/)
 - helmfile [install](https://github.com/helmfile/helmfile)
 
 ## Deployment Steps
+
+### Modify default configuration
+
+- Default k8s namespace is `sre`. You can modify this in the `helmfile.yaml`
+- By default 20Gi PVC (SAS EVS) will be allocated for Grafana and Prometheus. You can modify this in the `values.yaml`
 
 ```sh
 helmfile sync
