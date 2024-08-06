@@ -34,3 +34,10 @@ kubectl get secret --namespace sre prometheus-stack-grafana -o jsonpath="{.data.
 kubectl port-forward svc/prometheus-stack-grafana 8080:80 -nsre
 ```
 - From your browser you should be able to access Grafana via http://localhost:8080
+
+## Uninstall
+
+```sh
+helmfile destroy
+kubectl delete pvc --all -n ${namespace}
+```

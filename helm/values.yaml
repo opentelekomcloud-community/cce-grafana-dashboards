@@ -5,7 +5,7 @@ kubeScheduler:
 kubelet:
   enabled: true
 crds:
-  enabled: false
+  enabled: true 
 kubeControllerManager:
   enabled: false
 coreDns:
