@@ -1677,7 +1677,7 @@
             "axisColorMode": "series",
             "axisGridShow": false,
             "axisLabel": "",
-            "axisPlacement": "hidden",
+            "axisPlacement": "auto",
             "barAlignment": -1,
             "drawStyle": "line",
             "fillOpacity": 100,
@@ -2121,6 +2121,6 @@
   "timezone": "",
   "title": "CCE Cluster Autoscaler",
   "uid": "cb5bd4e3-f0dd-486d-9440-b1109df5a125",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
