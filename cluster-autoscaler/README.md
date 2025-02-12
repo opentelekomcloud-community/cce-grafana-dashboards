@@ -62,7 +62,7 @@ This preconfigured Grafana dashboard provides real-time insights into autoscaler
 - Percentage of requested vCPU / sum of cluster vCPU.
 
 
-![Image](images/cce_autoscaler_dashboard_2.png)
+![Image](images/cce_autoscaler_dashboard_3.png)
 
 ### Cluster memory
 - Current, requested and maximum(memoryTotal) memory of the cluster.
@@ -76,7 +76,7 @@ This preconfigured Grafana dashboard provides real-time insights into autoscaler
 ### Unscheduled pods
 - Number of unschedulable ("Pending") pods in the cluster.
 
-![Image](images/cce_autoscaler_dashboard_3.png)
+![Image](images/cce_autoscaler_dashboard_2.png)
 
 ### CA scaling hearthbeat
 - Nodes added and removed by CA. Nodes number is not always accurate when multiple nodes are added/destroyed at the same time, it just shows autoscaling activity. See dashboard above for node numbers.
