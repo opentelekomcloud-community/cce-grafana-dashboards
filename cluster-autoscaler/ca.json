@@ -224,7 +224,7 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(cluster_autoscaler_cluster_safe_to_autoscale)",
+          "expr": "max(cluster_autoscaler_cluster_safe_to_autoscale)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -418,7 +418,7 @@
       "options": {
         "displayLabels": [
           "name",
-          "value"
+          "percent"
         ],
         "legend": {
           "displayMode": "table",
@@ -1665,19 +1665,20 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Nodes added and removed by CA.",
+      "description": "Nodes added and removed by CA. Nodes number is not always accurate when multiple nodes are added/destroyed at the same time, it just shows autoscaling activity. See dashboard above for node numbers.",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-reds",
-            "seriesBy": "max"
+            "fixedColor": "semi-dark-red",
+            "mode": "palette-classic-by-name"
           },
           "custom": {
             "axisCenteredZero": true,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
+            "axisGridShow": false,
             "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
+            "axisPlacement": "hidden",
+            "barAlignment": -1,
             "drawStyle": "line",
             "fillOpacity": 100,
             "gradientMode": "none",
@@ -1687,12 +1688,12 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
             },
-            "lineWidth": 5,
-            "pointSize": 2,
+            "lineWidth": 1,
+            "pointSize": 1,
             "scaleDistribution": {
               "type": "linear"
             },
@@ -1700,7 +1701,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "percent"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -1712,14 +1713,45 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "blue",
                 "value": null
               }
             ]
           },
-          "unit": "node"
+          "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Scale Up"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Scale Down"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 11,
@@ -1733,10 +1765,10 @@
           "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "none",
           "sort": "none"
         }
       },
@@ -1748,9 +1780,9 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "- max(increase(cluster_autoscaler_scaled_down_nodes_total[3m]))",
+          "expr": "- max(increase(cluster_autoscaler_scaled_down_nodes_total[2m]))",
           "instant": false,
-          "legendFormat": "Removed nodes",
+          "legendFormat": "Scale Down",
           "range": true,
           "refId": "A"
         },
@@ -1760,15 +1792,15 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "max(increase(cluster_autoscaler_scaled_up_nodes_total[3m]))",
+          "expr": "max(increase(cluster_autoscaler_scaled_up_nodes_total[2m]))",
           "hide": false,
           "instant": false,
-          "legendFormat": "Added nodes",
+          "legendFormat": "Scale Up",
           "range": true,
           "refId": "B"
         }
       ],
-      "title": "CA scaling hearthbeat ( will reset on CA restarts )",
+      "title": "CA scaling hearthbeat",
       "type": "timeseries"
     },
     {
@@ -2074,7 +2106,7 @@
       "type": "stat"
     }
   ],
-  "refresh": "5s",
+  "refresh": false,
   "schemaVersion": 38,
   "style": "dark",
   "tags": [],
@@ -2082,13 +2114,13 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
-    "to": "now"
+    "from": "2025-02-11T09:59:39.613Z",
+    "to": "2025-02-11T14:16:37.458Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "CCE Cluster Autoscaler",
   "uid": "cb5bd4e3-f0dd-486d-9440-b1109df5a125",
-  "version": 2,
+  "version": 7,
   "weekStart": ""
 }
